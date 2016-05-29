@@ -1,4 +1,6 @@
 # BMTC API
+
+Root url : http://bmtcmob.hostg.in/api
 **Route wise details**
 ----
 Returns route wise details
@@ -9,12 +11,6 @@ Returns route wise details
 * **Method:**
 
   `POST`
-
-<!-- *  **URL Params** -->
-
-   <!-- **Required:** -->
-
-   <!-- `id=[integer]` -->
 
 * **Data Params**
 
@@ -42,7 +38,7 @@ Returns route wise details
   {"status":false,"message":"Please send required parameters as mentioned in the document"}
   ```
 
-**Route wise details**
+**Route map details**
 ----
 Returns route map details
 * **URL**
@@ -101,3 +97,46 @@ Returns route map details
   ```javascript
   {"status":false,"message":"Please send required parameters as mentioned in the document"}
   ```
+
+  **Nearest stop**
+  ---
+  Returns Nearest routes details
+  * **URL**
+
+    `/busstops/stopnearby/lat/:lat/lon/:lan/rad/2`
+
+  * **Method:**
+
+    `GET`
+
+  **Search stop**
+  ----
+  Returns stops matching the query string
+
+  * **URL**
+
+    `http://bmtcmob.hostg.in/api/busstops/stopsearch/name/:query`
+
+  * **Method**
+
+    `GET`
+
+  **Stop details**
+  ---
+  Returns stop details
+  * **URL**
+
+    `http://bmtcmob.hostg.in/api/itsstopwise/details`
+  * **Method**
+
+    `GET`
+  * **Data Params**
+
+    ```javascript
+    {
+    "stopID" : '9235'
+    }
+    ```
+
+# Implementations
+ * https://github.com/tachyons/bmtc_api
