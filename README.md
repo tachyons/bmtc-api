@@ -100,7 +100,7 @@ Returns route map details
 
   **Nearest stop**
   ---
-  Returns Nearest routes details
+  Returns Nearest stopes details
   * **URL**
 
     `/busstops/stopnearby/lat/:lat/lon/:lon/rad/2`
@@ -140,3 +140,4 @@ Returns route map details
 
 # Implementations
  * https://github.com/tachyons/bmtc
+ * https://github.com/tvsijin/bmtc-api-php
