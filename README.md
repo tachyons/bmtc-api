@@ -103,7 +103,7 @@ Returns route map details
   Returns Nearest routes details
   * **URL**
 
-    `/busstops/stopnearby/lat/:lat/lon/:lan/rad/2`
+    `/busstops/stopnearby/lat/:lat/lon/:lon/rad/2`
 
   * **Method:**
 
@@ -129,12 +129,12 @@ Returns route map details
     `http://bmtcmob.hostg.in/api/itsstopwise/details`
   * **Method**
 
-    `GET`
+    `POST`
   * **Data Params**
 
     ```javascript
     {
-    "stopID" : '9235'
+    "stopID" : '9234'
     }
     ```
 
