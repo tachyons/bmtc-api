@@ -141,3 +141,4 @@ Returns route map details
 # Implementations
  * https://github.com/tachyons/bmtc
  * https://github.com/tvsijin/bmtc-api-php
+ * https://github.com/vineeshnp/bmtc-js-api
