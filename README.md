@@ -151,9 +151,9 @@ Returns route map details
 
       ```javascript
     {
-        'adults' : <noOfAdults>,
+        'adults' : <no_of_adults>,
         'destination' : <destination>,
-        'serviceType' : <serviceType>,
+        'serviceType' : <service_type>,
         'source' : <source>
       }
       ```
