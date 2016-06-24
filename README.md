@@ -138,6 +138,35 @@ Returns route map details
     }
     ```
 
+  **Trip Fare**
+    ---
+    Returns trip fare details
+    * **URL**
+
+      `http://bmtcmob.hostg.in/api/tripfare/details`
+    * **Method**
+
+      `POST`
+    * **Data Params**
+
+      ```javascript
+    {
+        'adults' : <noOfAdults>,
+        'destination' : <destination>,
+        'serviceType' : <serviceType>,
+        'source' : <source>
+      }
+      ```
+      Service types can be either
+  * ordinary
+  * vajra
+  * vayu_vajra
+  * atal_sarige
+  * nice_service
+  * bengaluru_darshini
+
+
 # Implementations
  * https://github.com/tachyons/bmtc
  * https://github.com/tvsijin/bmtc-api-php
+ * https://github.com/vineeshnp/bmtc-js-api
