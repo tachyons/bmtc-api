@@ -139,7 +139,7 @@ Returns route map details
     ```
 
   **Trip Fare**
-    ---
+  ---
     Returns trip fare details
     * **URL**
 
