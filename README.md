@@ -166,6 +166,18 @@ Returns route map details
   * bengaluru_darshini
 
 
+* **Trip Stops**
+  ----
+  Returns list of stops on route matching route id
+    
+    * **URL**
+
+      `http://bmtcmob.hostg.in/api/tripdetails/routestop/routeid/:route_id`
+    * **Method**
+
+      `GET`
+
+
 # Implementations
  * https://github.com/tachyons/bmtc
  * https://github.com/tvsijin/bmtc-api-php
