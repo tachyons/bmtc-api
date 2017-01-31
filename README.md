@@ -166,7 +166,7 @@ Returns route map details
   * bengaluru_darshini
 
 
-* **Trip Stops**
+  **Trip Stops**
   ----
   Returns list of stops on route matching route id
     
@@ -176,6 +176,19 @@ Returns route map details
     * **Method**
 
       `GET`
+  
+        
+  **Bus Timetable**
+  ---
+  Returns a timetable of the given bus route
+   
+    * **URL**
+     
+      `http://bmtcmob.hostg.in/index.php/api/routetiming/timedetails/service/ord/routeno/:route-name`
+    * **Method**
+       
+      `GET`   
+
 
 
 # Implementations
