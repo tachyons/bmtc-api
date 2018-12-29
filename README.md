@@ -1,10 +1,173 @@
 # BMTC API
 
-Root url : http://bmtcmob.hostg.in/api
+Root url : https://bmtcmob.hostg.in/api
 
+**Note:** When using curl, you may encounter an error like `curl: (60) SSL certificate problem: unable to get local issuer certificate`. In such a case use the `--insecure` option to ignore it.
+
+**Stop and Route List**
+----
+Returns list of stops, chartered stops and routes
+
+* **URL**
+
+  `/busstops/allstop`
+  
+  `/busstops/charteredstop`
+  
+  `/routemap/routeno`
+  
+
+* **Method:**
+
+  `GET`
+  
+**Trip Planner (Direct)**
+----
+Returns list of buses plying directly between given stops
+
+* **URL**
+
+  `/itstrips/direct`
+  
+* **Method:**
+  `POST`
+  
+* **Data Params**
+
+  ```javascript
+  {
+  endID : "KR Market"
+  salt_value : <32characterhexadecimalstring>
+  startID : "Kempegowda Bus Station"    
+  }
+  ```
+  
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:**
+    
+  ```javascript
+  [{"vehicleno":"NULL","routeno":"211-B","vehiclelat":"NULL","vehiclelng":"NULL","routeid":"2909","serviceid":"1","nearestlatlng":"NULL","start_busstopname":"Kempegowda Bus Station","end_busstopname":"Somanahalli","traveldistance":"29.581","ETA":"0","FARE":"0","routeorder":"0","start_busstopcord":"12.97867246,77.56985352"},
+  {"vehicleno":"NULL","routeno":"213-N","vehiclelat":"NULL","vehiclelng":"NULL","routeid":"3068","serviceid":"1","nearestlatlng":"NULL","start_busstopname":"Kempegowda Bus Station","end_busstopname":"Nettigere","traveldistance":"116.481","ETA":"0","FARE":"0","routeorder":"0","start_busstopcord":"12.97867246,77.56985352"},
+  {"vehicleno":"NULL","routeno":"212-D","vehiclelat":"NULL","vehiclelng":"NULL","routeid":"3083","serviceid":"1","nearestlatlng":"NULL","start_busstopname":"Kempegowda Bus Station","end_busstopname":"Agara (Towards Gangasandra)","traveldistance":"24.281","ETA":"0","FARE":"0","routeorder":"0","start_busstopcord":"12.97867246,77.56985352"}
+  ...
+  ```
+  
+* **Error Response:**
+  * **Code:** 404 <br />
+  **Content:**
+  
+  ```javascript
+  []
+  ```  
+  
+**Trip Planner (Indirect)**
+----
+Returns list of intermediate stops, at which bus should be changed, to travel between two stops without a direct route.
+
+* **URL**
+
+  `/transitroute/transitpoint`
+  
+* **Method:**
+  `POST`
+  
+* **Data Params**
+
+  ```javascript
+  {
+  salt_value : <32characterhexadecimalstring>
+  endStop : Yeshwanthapura Railway Station                  
+  startStop : Kengeri Satellite Town  
+  }
+  ```
+  
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:**
+    
+  ```javascript
+  {"start_grp_id":"22349","end_grp_id":"23366","transit_points":
+  [{"common_group_id":"16466","common_group_name":"Vijayanagara TTMC","ori_busstop_name":"Kengeri Satellite Town","ori_busstop_lat":"12.92383974","ori_busstop_lang":"77.48494014","ori_transit_busstop_name":"Vijayanagara TTMC","ori_transit_busstop_lat":"12.96551023","ori_transit_busstop_lang":"77.53470719","ori_vehicle":[],"dest_transit_busstop_name":"Vijayanagara TTMC","dest_transit_busstop_lat":"12.96551023","dest_transit_busstop_lang":"77.53470719","dest_busstop_name":"Yeshwanthapura Railway Station","dest_busstop_lat":"13.02176584","dest_busstop_lang":"77.55314268","dest_vehicle":[]},
+  {"common_group_id":"19575","common_group_name":"Kempegowda Bus Station","ori_busstop_name":"Kengeri Satellite Town","ori_busstop_lat":"12.92378203","ori_busstop_lang":"77.48497840","ori_transit_busstop_name":"Kempegowda Bus Station","ori_transit_busstop_lat":"12.97750611","ori_transit_busstop_lang":"77.57291257","ori_vehicle":[],"dest_transit_busstop_name":"Kempegowda Bus Station","dest_transit_busstop_lat":"12.97825298","dest_transit_busstop_lang":"77.57081777","dest_busstop_name":"Yeshwanthapura Railway Station","dest_busstop_lat":"13.02339976","dest_busstop_lang":"77.55055099","dest_vehicle":[]},
+  ...
+  ```
+  
+**Number of Buses (Indirect)**
+----
+Returns number of buses available between each end and the intermediate stop
+
+* **URL**
+
+  `/transitroute/transitbuscount`
+  
+* **Method:**
+  `POST`
+  
+* **Data Params**
+
+  ```javascript
+  {
+  DestinationTransitname : Yeshwanthapura
+  SourceTransitname : Yeshwanthapura
+  SourceName : Kengeri Satellite Town
+  DestinationName : Yeshwanthapura Railway Station
+  salt_value : <32characterhexadecimalstring>
+  }
+  ```
+  
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:**
+    
+  ```javascript
+  { 
+  "sourceCount": 4,  
+  "transitCount": 4 
+  }   
+  ```
+  
+**List of Buses (Indirect)**
+----
+Returns list of buses between each end and the intermediate stop
+
+* **URL**
+
+  `/itstrips/indirect`
+  
+* **Method:**
+  `POST`
+  
+* **Data Params**
+
+  ```javascript
+  {
+  salt_value : 4ce2634b63ca9d93dab6940fe1de642d   
+  endStop : Yeshwanthapura                  
+  startStop : Kengeri Satellite Town  
+  }
+  ```
+  
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:**
+    
+  ```javascript
+  {"vehicleno":"KA53F0292","routeno":"401-M","vehiclelat":"12.915822","vehiclelng":"77.481865","serviceid":"1","EtDepart":"166","ETArrive":2617,"routeorder":"7"},
+  {"vehicleno":"KA57F2863","routeno":"401-L","vehiclelat":"12.918146","vehiclelng":"77.490822","serviceid":"1","EtDepart":"307","ETArrive":2760,"routeorder":"29"},
+  {"vehicleno":"KA01F8982","routeno":"401-MDN","vehiclelat":"12.910482","vehiclelng":"77.483063","serviceid":"1","EtDepart":"600","ETArrive":3054,"routeorder":"4"},
+  {"vehicleno":"KA01F4949","routeno":"401-MDN","vehiclelat":"12.914580","vehiclelng":"77.486916","serviceid":"1","EtDepart":9999999,"EtArrive":9999999,"routeorder":"1"},
+  ...
+  ```
+  
 **Route wise details**
 ----
 Returns route wise details
+
 * **URL**
 
   `/itsroutewise/details`
@@ -85,7 +248,9 @@ Returns route map details
       "distance": "80",
       "latLng": "12.97751447, 77.57178022",
       "stopName": "Kempegowda Bus Station"
-    },
+    },  
+    ...
+    ...
     {
       "path": "stenAwqmxMyJO",
       "distance": "210"
@@ -101,22 +266,41 @@ Returns route map details
 
 **Nearest stop**
 ---
-Returns Nearest stopes details
+Returns list of stops nearest to a given coordinate
+
 * **URL**
 
   `/busstops/stopnearby/lat/:lat/lon/:lon/rad/2`
-
+  
+  or
+  
+  `/busstops/stopname/lat/:lat/lon/:lon/rad/1/format`
+  
 * **Method:**
 
   `GET`
+ 
+* **Example**
 
+  `/busstops/stopnearby/lat/12.9809/lon/77.5974/rad/2`
+    
+  ```javascript
+  {
+  {"StopId":"12567","StopName":"Cubbon Park Metro Station(towards -GPO)",
+  "StopLat":"12.98093983","StopLong":"77.59717248","StopDist":"0.02"},
+  {"StopId":"645","StopName":"GPO(towards - Raj Bhavan)",
+  "StopLat":"12.98174883","StopLong":"77.59483300","StopDist":"0.18"},
+  {"StopId":"587","StopName":"Indian Express(towards - Vidhana Soudha)",
+  "StopLat":"12.98347460","StopLong":"77.59634127","StopDist":"0.19"}
+  ```
+  
 **Search stop**
 ----
-Returns stops matching the query string
+Returns list of stops with names matching the query string
 
 * **URL**
 
-  `http://bmtcmob.hostg.in/api/busstops/stopsearch/name/:query`
+  `/busstops/stopsearch/name/:query`
 
 * **Method**
 
@@ -125,9 +309,10 @@ Returns stops matching the query string
 **Stop details**
 ---
 Returns stop details
+
 * **URL**
 
-  `http://bmtcmob.hostg.in/api/itsstopwise/details`
+  `/itsstopwise/details`
 * **Method**
 
   `POST`
@@ -144,7 +329,7 @@ Returns stop details
 Returns trip fare details
 * **URL**
 
-    `http://bmtcmob.hostg.in/api/tripfare/details`
+    `/tripfare/details`
 * **Method**
 
     `POST`
@@ -173,7 +358,7 @@ Returns list of stops on route matching route id
     
 * **URL**
 
-    `http://bmtcmob.hostg.in/api/tripdetails/routestop/routeid/:route_id`
+    `/tripdetails/routestop/routeid/:route_id`
 * **Method**
 
     `GET`
